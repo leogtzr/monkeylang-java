@@ -1,5 +1,8 @@
 package com.monkey.lang.token;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Token {
 
     private TokenType type;
@@ -11,6 +14,19 @@ public class Token {
     }
 
     public Token() {}
+
+    private static Map<String, String> keywords = new HashMap<String, String>() {{
+        put("fn", TokenLiterals.FUNCTION);
+        put("let", TokenLiterals.LET);
+    }};
+
+    public static TokenType lookupIdentifier(final String literal) {
+        if (keywords.containsKey(literal)) {
+            return new TokenType(keywords.get(literal));
+        } else {
+            return new TokenType(TokenLiterals.IDENT);
+        }
+    }
 
     public TokenType getType() {
         return type;
@@ -30,9 +46,6 @@ public class Token {
 
     @Override
     public String toString() {
-        return "Token{" +
-                "type=" + type +
-                ", literal='" + literal + '\'' +
-                '}';
+        return "Token{" + type + ", literal='" + literal + '\'' + '}';
     }
 }

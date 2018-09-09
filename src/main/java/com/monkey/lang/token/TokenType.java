@@ -20,9 +20,7 @@ public class TokenType {
 
     @Override
     public String toString() {
-        return "TokenType{" +
-                "type='" + type + '\'' +
-                '}';
+        return String.format("T(%s)", this.type);
     }
 
     @Override

@@ -73,6 +73,8 @@ public class Lexer {
     public Token nextToken() {
         Token tok = null;
 
+        this.skipWithespace();
+
         switch (this.ch) {
             case '=':
                 tok = newToken(new TokenType(TokenLiterals.ASSIGN), this.ch);
@@ -108,7 +110,23 @@ public class Lexer {
 
             case 0:
                 tok = newToken(new TokenType(TokenLiterals.EOF), (char)0);
+                tok.setLiteral("");
                 break;
+            default:
+                if (isLetter(this.ch)) {
+                    tok = new Token();
+                    tok.setLiteral(this.readIdentifier());
+                    tok.setType(Token.lookupIdentifier(tok.getLiteral()));
+                    return tok;
+                } else if (isDigit(this.ch)) {
+                    tok = new Token();
+                    tok.setLiteral(this.readNumber());
+                    tok.setType(new TokenType(TokenLiterals.INT));
+                    return tok;
+                } else {
+                    tok = newToken(new TokenType(TokenLiterals.ILLEGAL), this.ch);
+                }
+
         }
 
         this.readChar();
@@ -117,6 +135,36 @@ public class Lexer {
 
     private Token newToken(final TokenType tokenType, final char ch) {
         return new Token(tokenType, ch + "");
+    }
+
+    private static boolean isLetter(final char ch) {
+        return 'a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z' || ch == '_';
+    }
+
+    private static boolean isDigit(final char ch) {
+        return '0' <= ch && ch <= '9';
+    }
+
+    private void skipWithespace() {
+        while (this.ch == ' ' || this.ch == '\t' || this.ch == '\r' || this.ch == '\n') {
+            this.readChar();
+        }
+    }
+
+    private String readIdentifier() {
+        final int position = this.position;
+        while (isLetter(this.ch)) {
+            this.readChar();
+        }
+        return this.input.substring(position, this.position);
+    }
+
+    private String readNumber() {
+        final int position = this.position;
+        while (isDigit(this.ch)) {
+            this.readChar();
+        }
+        return this.input.substring(position, this.position);
     }
 
 }
