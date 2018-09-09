@@ -1,4 +1,4 @@
-package com.monkey.lang.monkeyjava;
+package com.monkey.lang;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
