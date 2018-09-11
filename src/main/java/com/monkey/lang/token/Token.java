@@ -18,6 +18,11 @@ public class Token {
     private static Map<String, String> keywords = new HashMap<String, String>() {{
         put("fn", TokenLiterals.FUNCTION);
         put("let", TokenLiterals.LET);
+        put("true", TokenLiterals.TRUE);
+        put("false", TokenLiterals.FALSE);
+        put("if", TokenLiterals.IF);
+        put("else", TokenLiterals.ELSE);
+        put("return", TokenLiterals.RETURN);
     }};
 
     public static TokenType lookupIdentifier(final String literal) {

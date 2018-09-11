@@ -100,6 +100,30 @@ public class Lexer {
                 tok = newToken(new TokenType(TokenLiterals.PLUS), this.ch);
                 break;
 
+            case '-':
+                tok = newToken(new TokenType(TokenLiterals.MINUS), this.ch);
+                break;
+
+            case '!':
+                tok = newToken(new TokenType(TokenLiterals.BANG), this.ch);
+                break;
+
+            case '/':
+                tok = newToken(new TokenType(TokenLiterals.SLASH), this.ch);
+                break;
+
+            case '*':
+                tok = newToken(new TokenType(TokenLiterals.ASTERISK), this.ch);
+                break;
+
+            case '<':
+                tok = newToken(new TokenType(TokenLiterals.LT), this.ch);
+                break;
+
+            case '>':
+                tok = newToken(new TokenType(TokenLiterals.GT), this.ch);
+                break;
+
             case '{':
                 tok = newToken(new TokenType(TokenLiterals.LBRACE), this.ch);
                 break;
@@ -133,10 +157,6 @@ public class Lexer {
         return tok;
     }
 
-    private Token newToken(final TokenType tokenType, final char ch) {
-        return new Token(tokenType, ch + "");
-    }
-
     private static boolean isLetter(final char ch) {
         return 'a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z' || ch == '_';
     }
@@ -165,6 +185,10 @@ public class Lexer {
             this.readChar();
         }
         return this.input.substring(position, this.position);
+    }
+
+    private Token newToken(final TokenType tokenType, final char ch) {
+        return new Token(tokenType, ch + "");
     }
 
 }
