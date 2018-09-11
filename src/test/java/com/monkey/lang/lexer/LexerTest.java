@@ -30,7 +30,12 @@ public class LexerTest {
                 "\n" +
                 "let result = add(five, ten);\n" +
                 "!-/*5;\n" +
-                "5 < 10 > 5;";
+                "5 < 10 > 5;" +
+                "if (5 < 10) {\n" +
+                "    return true;\n" +
+                "} else {" +
+                "return false;" +
+                "}";
 
         final Token[] tests = {
                 new Token(new TokenType(TokenLiterals.LET), "let"),
@@ -85,7 +90,8 @@ public class LexerTest {
                 new Token(new TokenType(TokenLiterals.GT), ">"),
                 new Token(new TokenType(TokenLiterals.INT), "5"),
                 new Token(new TokenType(TokenLiterals.SEMICOLON), ";"),
-                new Token(new TokenType(TokenLiterals.EOF), ""),
+                // new Token(new TokenType(TokenLiterals.EOF), ""),
+
         };
 
         /*

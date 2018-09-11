@@ -40,4 +40,7 @@ public class TokenLiterals {
     public static final String SLASH = "/";
     public static final String LT = "<";
     public static final String GT = ">";
+
+    public static final String EQ = "==";
+    public static final String NOT_EQ = "!=";
 }

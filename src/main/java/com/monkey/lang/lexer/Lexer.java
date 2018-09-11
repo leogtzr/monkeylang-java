@@ -77,7 +77,13 @@ public class Lexer {
 
         switch (this.ch) {
             case '=':
-                tok = newToken(new TokenType(TokenLiterals.ASSIGN), this.ch);
+                if (this.peekChar() == '=') {
+                    final char ch = this.ch;
+                    this.readChar();
+                    tok = new Token(new TokenType(TokenLiterals.ASSIGN), (ch + this.ch) + "");
+                } else {
+                    tok = newToken(new TokenType(TokenLiterals.ASSIGN), this.ch);
+                }
                 break;
 
             case ';':
@@ -105,7 +111,13 @@ public class Lexer {
                 break;
 
             case '!':
-                tok = newToken(new TokenType(TokenLiterals.BANG), this.ch);
+                if (this.peekChar() == '=') {
+                    final char ch = this.ch;
+                    this.readChar();
+                    tok = new Token(new TokenType(TokenLiterals.NOT_EQ), (ch + this.ch) + "");
+                } else {
+                    tok = newToken(new TokenType(TokenLiterals.BANG), this.ch);
+                }
                 break;
 
             case '/':
@@ -185,6 +197,14 @@ public class Lexer {
             this.readChar();
         }
         return this.input.substring(position, this.position);
+    }
+
+    private char peekChar() {
+        if (this.readPosition >= this.input.length()) {
+            return 0;
+        } else {
+            return this.input.charAt(this.readPosition);
+        }
     }
 
     private Token newToken(final TokenType tokenType, final char ch) {
