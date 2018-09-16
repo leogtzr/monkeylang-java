@@ -4,7 +4,7 @@ import com.monkey.lang.token.Token;
 import com.monkey.lang.token.TokenLiterals;
 import com.monkey.lang.token.TokenType;
 
-public class Lexer {
+public final class Lexer {
 
     private String input;
     private int position;

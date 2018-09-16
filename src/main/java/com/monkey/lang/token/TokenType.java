@@ -2,7 +2,7 @@ package com.monkey.lang.token;
 
 import java.util.Objects;
 
-public class TokenType {
+public final class TokenType {
 
     private String type;
 

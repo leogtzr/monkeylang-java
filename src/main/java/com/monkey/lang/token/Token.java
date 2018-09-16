@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Token {
+public final class Token {
 
     private TokenType type;
     private String literal;
