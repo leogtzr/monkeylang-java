@@ -3,7 +3,7 @@ package com.monkey.lang.ast;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Program {
+public final class Program implements Node {
 
     private List<Statement> statements = new ArrayList<>();
 
@@ -19,4 +19,21 @@ public final class Program {
         this.statements = statements;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder out = new StringBuilder();
+        for (final Statement stmt : this.statements) {
+            out.append(stmt.toString());
+        }
+        return out.toString();
+    }
+
+    @Override
+    public String tokenLiteral() {
+        if (this.statements.size() > 0) {
+            return statements.get(0).tokenLiteral();
+        } else {
+            return "";
+        }
+    }
 }

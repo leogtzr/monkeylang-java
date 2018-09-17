@@ -97,21 +97,11 @@ public final class Parser {
             default:
                 return null;
         }
-
-//        switch p.curToken.Type {
-//            case token.LET:
-//                return p.parseLetStatement()
-//            case token.RETURN:
-//                return p.parseReturnStatement()
-//            default:
-//                return nil
-//        }
     }
 
     private LetStatement parseLetStatement() {
         final LetStatement stmt = new LetStatement();
         stmt.setToken(this.getCurToken());
-        //stmt := &ast.LetStatement{Token: p.curToken};
 
         if (!this.expectPeek(new TokenType(TokenLiterals.IDENT))) {
             return null;
@@ -122,7 +112,6 @@ public final class Parser {
         identifier.setValue(this.getCurToken().getLiteral());
 
         stmt.setName(identifier);
-        //stmt.Name = &ast.Identifier{Token: p.curToken, Value: p.curToken.Literal}
 
         if (!this.curTokenIs(new TokenType(TokenLiterals.SEMICOLON))) {
             this.nextToken();
@@ -136,11 +125,9 @@ public final class Parser {
         final ReturnStatement stmt = new ReturnStatement();
         stmt.setToken(this.getCurToken());
 
-        //stmt := &ast.ReturnStatement{Token: p.curToken}
-
         this.nextToken();
 
-        // TODO: We're skipping the expression until we
+        // We're skipping the expression until we
         // encounter a semicolon.
         while (!this.curTokenIs(new TokenType(TokenLiterals.SEMICOLON))) {
             this.nextToken();

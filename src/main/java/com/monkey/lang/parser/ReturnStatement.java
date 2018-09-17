@@ -36,9 +36,4 @@ public final class ReturnStatement extends Statement implements Node {
         return this.token.getLiteral();
     }
 
-    // TokenLiteral ...
-//    func (rs *ReturnStatement) TokenLiteral() string {
-//        return rs.Token.Literal
-//    }
-
 }

@@ -4,7 +4,7 @@ import com.monkey.lang.token.Token;
 
 import java.util.Objects;
 
-public final class Identifier implements Node{
+public final class Identifier extends Expression implements Node {
 
     private Token token;
     private String value;
@@ -51,5 +51,10 @@ public final class Identifier implements Node{
     @Override
     public String tokenLiteral() {
         return this.token.getLiteral();
+    }
+
+    @Override
+    public void expressionNode() {
+
     }
 }

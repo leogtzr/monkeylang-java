@@ -1,5 +1,7 @@
 package com.monkey.lang.ast;
 
-public class Expression {
+public abstract class Expression {
+
+    public abstract void expressionNode();
 
 }
