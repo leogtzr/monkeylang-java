@@ -23,7 +23,7 @@ class ParserTest {
         final Program program = p.parseProgram();
 
         if (p.getErrors().size() > 0) {
-           System.err.printf("parser has %d errors\n", p.getErrors().size());
+            System.err.printf("parser has %d errors\n", p.getErrors().size());
             for (final String msg : p.getErrors()) {
                 System.err.printf("parser error: %s", msg);
             }
@@ -33,10 +33,11 @@ class ParserTest {
         if (program == null) {
             fail("ParseProgram() returned null");
         }
-        if (program.getStatements().size() != 3) {
-            fail(String.format("program.Statements does not contain 3 statements. got=%d", program.getStatements().size()));
 
-        }
+        assertEquals(
+                program.getStatements().size(),
+                3,
+                String.format("program.Statements does not contain 3 statements. got=%d", program.getStatements().size()));
 
         final String[] tests = {"x", "y", "foobar"};
 
@@ -48,19 +49,11 @@ class ParserTest {
     }
 
     private void testLetStatement(final Statement s, final String name) {
-        if (!s.tokenLiteral().equals("let")) {
-            fail(String.format("s.TokenLiteral() not 'let', got=%s", s.tokenLiteral()));
-        }
-
-        if (!(s instanceof LetStatement)) {
-            fail(String.format("s not *ast.LetStatement. got=%s", s));
-        }
+        assertEquals(s.tokenLiteral(), "let", String.format("s.TokenLiteral() not 'let', got=%s", s.tokenLiteral()));
+        assertEquals(s instanceof LetStatement, true, String.format("s not *ast.LetStatement. got=%s", s));
 
         final LetStatement letStmt = (LetStatement)s;
-
-        if (!letStmt.getName().tokenLiteral().equals(name)) {
-            fail(String.format("s.Name not '%s'. got=%s", name, letStmt.getName()));
-        }
+        assertEquals(letStmt.getName().tokenLiteral(), name, String.format("s.Name not '%s'. got=%s", name, letStmt.getName()));
     }
 
 }

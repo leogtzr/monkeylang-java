@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="921307f8-6186-44f8-a719-64e93e67d228" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/monkey/lang/ast/AstTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/lang/ast/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/lang/ast/Expression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/lang/ast/Identifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/lang/ast/Identifier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/lang/ast/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/lang/ast/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/lang/parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/lang/parser/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/lang/parser/ReturnStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/lang/parser/ReturnStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/monkey/lang/parser/ParserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/monkey/lang/parser/ParserTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,12 +38,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="10105" />
+          <entry key="java" value="10279" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="10105" />
+          <entry key="JAVA" value="10279" />
         </counts>
       </usages-collector>
     </session>
@@ -59,8 +53,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/monkey/lang/lexer/LexerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="24" column="35" lean-forward="true" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
+            <state relative-caret-position="812">
+              <caret line="28" column="24" lean-forward="true" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -93,11 +87,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/monkey/lang/parser/ParserTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="377">
+              <caret line="13" column="30" lean-forward="true" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -159,11 +153,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/monkey/lang/ast/AstTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="18" column="85" selection-start-line="18" selection-start-column="80" selection-end-line="18" selection-end-column="85" />
+            <state relative-caret-position="747">
+              <caret line="35" column="51" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -236,13 +230,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/lang/ast/LetStatement.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/lang/token/TokenType.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/lang/ast/Statement.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/monkey/lang/parser/ParserTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/lang/parser/ReturnStatement.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/lang/parser/Parser.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/lang/ast/Program.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/lang/ast/Expression.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/lang/ast/Identifier.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/monkey/lang/ast/AstTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/monkey/lang/parser/ParserTest.java" />
       </list>
     </option>
   </component>
@@ -356,6 +350,24 @@
               <item name="lang" type="462c0819:PsiDirectoryNode" />
               <item name="ast" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="monkey-java" type="b2602c69:ProjectViewProjectNode" />
+              <item name="monkeylang-java" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="lang" type="462c0819:PsiDirectoryNode" />
+              <item name="lexer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="monkey-java" type="b2602c69:ProjectViewProjectNode" />
+              <item name="monkeylang-java" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="lang" type="462c0819:PsiDirectoryNode" />
+              <item name="parser" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -363,7 +375,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537168098507" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537168587439" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -393,7 +405,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.AstTest">
+  <component name="RunManager" selected="JUnit.ParserTest">
     <configuration name="MonkeyJavaApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.monkey.lang.MonkeyJavaApplication" />
       <module name="monkey-java" />
@@ -493,8 +505,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AstTest" />
         <item itemvalue="JUnit.ParserTest" />
+        <item itemvalue="JUnit.AstTest" />
         <item itemvalue="JUnit.All in monkey-java" />
         <item itemvalue="Application.MonkeyJavaApplication" />
         <item itemvalue="JUnit.LexerTest.nextToken" />
@@ -515,27 +527,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ParserTest - 2018.09.17 at 00h 32m 45s.xml">
-      <configuration name="ParserTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ParserTest - 2018.09.17 at 00h 33m 35s.xml">
-      <configuration name="ParserTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ParserTest - 2018.09.17 at 00h 36m 09s.xml">
-      <configuration name="ParserTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ParserTest - 2018.09.17 at 01h 01m 57s.xml">
-      <configuration name="ParserTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="AstTest - 2018.09.17 at 01h 02m 14s.xml">
-      <configuration name="AstTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="AstTest - 2018.09.17 at 01h 03m 02s.xml">
-      <configuration name="AstTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="AstTest - 2018.09.17 at 01h 04m 16s.xml">
-      <configuration name="AstTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="AstTest - 2018.09.17 at 01h 05m 14s.xml">
       <configuration name="AstTest" configurationId="JUnit" />
     </history-entry>
@@ -544,6 +535,27 @@
     </history-entry>
     <history-entry file="AstTest - 2018.09.17 at 01h 08m 09s.xml">
       <configuration name="AstTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="AstTest - 2018.09.17 at 01h 12m 25s.xml">
+      <configuration name="AstTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ParserTest - 2018.09.17 at 01h 12m 41s.xml">
+      <configuration name="ParserTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ParserTest - 2018.09.17 at 01h 13m 37s.xml">
+      <configuration name="ParserTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ParserTest - 2018.09.17 at 01h 13m 44s.xml">
+      <configuration name="ParserTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ParserTest - 2018.09.17 at 01h 14m 50s.xml">
+      <configuration name="ParserTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ParserTest - 2018.09.17 at 01h 15m 17s.xml">
+      <configuration name="ParserTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ParserTest - 2018.09.17 at 01h 15m 44s.xml">
+      <configuration name="ParserTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -692,16 +704,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/monkey/lang/lexer/LexerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="24" column="35" lean-forward="true" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/lang/parser/ReturnStatement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="116">
@@ -709,16 +711,6 @@
           <folding>
             <element signature="e#342#343#0" expanded="true" />
             <element signature="e#370#371#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/monkey/lang/parser/ParserTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -770,8 +762,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/monkey/lang/ast/AstTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="18" column="85" selection-start-line="18" selection-start-column="80" selection-end-line="18" selection-end-column="85" />
+        <state relative-caret-position="747">
+          <caret line="35" column="51" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/monkey/lang/lexer/LexerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="812">
+          <caret line="28" column="24" lean-forward="true" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/monkey/lang/parser/ParserTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="13" column="30" lean-forward="true" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
