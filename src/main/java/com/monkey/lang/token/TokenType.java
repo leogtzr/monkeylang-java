@@ -20,7 +20,6 @@ public final class TokenType {
 
     @Override
     public String toString() {
-        //return String.format("T(%s)", this.type);
         return this.type;
     }
 

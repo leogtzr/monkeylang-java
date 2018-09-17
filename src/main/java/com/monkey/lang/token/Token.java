@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.monkey.lang.token.TokenLiterals.*;
+
 public final class Token {
 
     private TokenType type;
@@ -17,20 +19,20 @@ public final class Token {
     public Token() {}
 
     private static Map<String, String> keywords = new HashMap<String, String>() {{
-        put("fn", TokenLiterals.FUNCTION);
-        put("let", TokenLiterals.LET);
-        put("true", TokenLiterals.TRUE);
-        put("false", TokenLiterals.FALSE);
-        put("if", TokenLiterals.IF);
-        put("else", TokenLiterals.ELSE);
-        put("return", TokenLiterals.RETURN);
+        put("fn", FUNCTION);
+        put("let", LET);
+        put("true", TRUE);
+        put("false", FALSE);
+        put("if", IF);
+        put("else", ELSE);
+        put("return", RETURN);
     }};
 
     public static TokenType lookupIdentifier(final String literal) {
         if (keywords.containsKey(literal)) {
             return new TokenType(keywords.get(literal));
         } else {
-            return new TokenType(TokenLiterals.IDENT);
+            return new TokenType(IDENT);
         }
     }
 

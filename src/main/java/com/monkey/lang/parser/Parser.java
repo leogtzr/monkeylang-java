@@ -75,7 +75,6 @@ public final class Parser {
     public Program parseProgram() {
 
         final Program program = new Program();
-        //program.setStatements(new ArrayList<>());
 
         while (!this.getCurToken().getType().equals(new TokenType(TokenLiterals.EOF))) {
             final Statement stmt = this.parseStatement();

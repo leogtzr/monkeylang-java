@@ -31,7 +31,7 @@ class ParserTest {
         }
 
         if (program == null) {
-            fail("ParseProgram() returned null");
+            fail("parseProgram() returned null");
         }
 
         assertEquals(

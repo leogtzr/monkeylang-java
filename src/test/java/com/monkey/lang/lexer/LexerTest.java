@@ -1,9 +1,27 @@
 package com.monkey.lang.lexer;
 
 import com.monkey.lang.token.Token;
-import com.monkey.lang.token.TokenLiterals;
 import com.monkey.lang.token.TokenType;
 import org.junit.jupiter.api.Test;
+
+import static com.monkey.lang.token.TokenLiterals.LET;
+import static com.monkey.lang.token.TokenLiterals.IDENT;
+import static com.monkey.lang.token.TokenLiterals.ASSIGN;
+import static com.monkey.lang.token.TokenLiterals.INT;
+import static com.monkey.lang.token.TokenLiterals.SEMICOLON;
+import static com.monkey.lang.token.TokenLiterals.FUNCTION;
+import static com.monkey.lang.token.TokenLiterals.LPAREN;
+import static com.monkey.lang.token.TokenLiterals.COMMA;
+import static com.monkey.lang.token.TokenLiterals.RPAREN;
+import static com.monkey.lang.token.TokenLiterals.LBRACE;
+import static com.monkey.lang.token.TokenLiterals.PLUS;
+import static com.monkey.lang.token.TokenLiterals.RBRACE;
+import static com.monkey.lang.token.TokenLiterals.BANG;
+import static com.monkey.lang.token.TokenLiterals.MINUS;
+import static com.monkey.lang.token.TokenLiterals.SLASH;
+import static com.monkey.lang.token.TokenLiterals.ASTERISK;
+import static com.monkey.lang.token.TokenLiterals.LT;
+import static com.monkey.lang.token.TokenLiterals.GT;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,58 +56,58 @@ public class LexerTest {
                 "}";
 
         final Token[] tests = {
-                new Token(new TokenType(TokenLiterals.LET), "let"),
-                new Token(new TokenType(TokenLiterals.IDENT), "five"),
-                new Token(new TokenType(TokenLiterals.ASSIGN), "="),
-                new Token(new TokenType(TokenLiterals.INT), "5"),
-                new Token(new TokenType(TokenLiterals.SEMICOLON), ";"),
-                new Token(new TokenType(TokenLiterals.LET), "let"),
-                new Token(new TokenType(TokenLiterals.IDENT), "ten"),
-                new Token(new TokenType(TokenLiterals.ASSIGN), "="),
-                new Token(new TokenType(TokenLiterals.INT), "10"),
-                new Token(new TokenType(TokenLiterals.SEMICOLON), ";"),
+                new Token(new TokenType(LET), "let"),
+                new Token(new TokenType(IDENT), "five"),
+                new Token(new TokenType(ASSIGN), "="),
+                new Token(new TokenType(INT), "5"),
+                new Token(new TokenType(SEMICOLON), ";"),
+                new Token(new TokenType(LET), "let"),
+                new Token(new TokenType(IDENT), "ten"),
+                new Token(new TokenType(ASSIGN), "="),
+                new Token(new TokenType(INT), "10"),
+                new Token(new TokenType(SEMICOLON), ";"),
 
-                new Token(new TokenType(TokenLiterals.LET), "let"),
-                new Token(new TokenType(TokenLiterals.IDENT), "add"),
-                new Token(new TokenType(TokenLiterals.ASSIGN), "="),
-                new Token(new TokenType(TokenLiterals.FUNCTION), "fn"),
-                new Token(new TokenType(TokenLiterals.LPAREN), "("),
-                new Token(new TokenType(TokenLiterals.IDENT), "x"),
-                new Token(new TokenType(TokenLiterals.COMMA), ","),
-                new Token(new TokenType(TokenLiterals.IDENT), "y"),
-                new Token(new TokenType(TokenLiterals.RPAREN), ")"),
-                new Token(new TokenType(TokenLiterals.LBRACE), "{"),
-                new Token(new TokenType(TokenLiterals.IDENT), "x"),
-                new Token(new TokenType(TokenLiterals.PLUS), "+"),
-                new Token(new TokenType(TokenLiterals.IDENT), "y"),
-                new Token(new TokenType(TokenLiterals.SEMICOLON), ";"),
-                new Token(new TokenType(TokenLiterals.RBRACE), "}"),
-                new Token(new TokenType(TokenLiterals.SEMICOLON), ";"),
+                new Token(new TokenType(LET), "let"),
+                new Token(new TokenType(IDENT), "add"),
+                new Token(new TokenType(ASSIGN), "="),
+                new Token(new TokenType(FUNCTION), "fn"),
+                new Token(new TokenType(LPAREN), "("),
+                new Token(new TokenType(IDENT), "x"),
+                new Token(new TokenType(COMMA), ","),
+                new Token(new TokenType(IDENT), "y"),
+                new Token(new TokenType(RPAREN), ")"),
+                new Token(new TokenType(LBRACE), "{"),
+                new Token(new TokenType(IDENT), "x"),
+                new Token(new TokenType(PLUS), "+"),
+                new Token(new TokenType(IDENT), "y"),
+                new Token(new TokenType(SEMICOLON), ";"),
+                new Token(new TokenType(RBRACE), "}"),
+                new Token(new TokenType(SEMICOLON), ";"),
 
-                new Token(new TokenType(TokenLiterals.LET), "let"),
-                new Token(new TokenType(TokenLiterals.IDENT), "result"),
-                new Token(new TokenType(TokenLiterals.ASSIGN), "="),
-                new Token(new TokenType(TokenLiterals.IDENT), "add"),
-                new Token(new TokenType(TokenLiterals.LPAREN), "("),
-                new Token(new TokenType(TokenLiterals.IDENT), "five"),
-                new Token(new TokenType(TokenLiterals.COMMA), ","),
-                new Token(new TokenType(TokenLiterals.IDENT), "ten"),
-                new Token(new TokenType(TokenLiterals.RPAREN), ")"),
-                new Token(new TokenType(TokenLiterals.SEMICOLON), ";"),
+                new Token(new TokenType(LET), "let"),
+                new Token(new TokenType(IDENT), "result"),
+                new Token(new TokenType(ASSIGN), "="),
+                new Token(new TokenType(IDENT), "add"),
+                new Token(new TokenType(LPAREN), "("),
+                new Token(new TokenType(IDENT), "five"),
+                new Token(new TokenType(COMMA), ","),
+                new Token(new TokenType(IDENT), "ten"),
+                new Token(new TokenType(RPAREN), ")"),
+                new Token(new TokenType(SEMICOLON), ";"),
 
-                new Token(new TokenType(TokenLiterals.BANG), "!"),
-                new Token(new TokenType(TokenLiterals.MINUS), "-"),
-                new Token(new TokenType(TokenLiterals.SLASH), "/"),
-                new Token(new TokenType(TokenLiterals.ASTERISK), "*"),
-                new Token(new TokenType(TokenLiterals.INT), "5"),
-                new Token(new TokenType(TokenLiterals.SEMICOLON), ";"),
+                new Token(new TokenType(BANG), "!"),
+                new Token(new TokenType(MINUS), "-"),
+                new Token(new TokenType(SLASH), "/"),
+                new Token(new TokenType(ASTERISK), "*"),
+                new Token(new TokenType(INT), "5"),
+                new Token(new TokenType(SEMICOLON), ";"),
 
-                new Token(new TokenType(TokenLiterals.INT), "5"),
-                new Token(new TokenType(TokenLiterals.LT), "<"),
-                new Token(new TokenType(TokenLiterals.INT), "10"),
-                new Token(new TokenType(TokenLiterals.GT), ">"),
-                new Token(new TokenType(TokenLiterals.INT), "5"),
-                new Token(new TokenType(TokenLiterals.SEMICOLON), ";"),
+                new Token(new TokenType(INT), "5"),
+                new Token(new TokenType(LT), "<"),
+                new Token(new TokenType(INT), "10"),
+                new Token(new TokenType(GT), ">"),
+                new Token(new TokenType(INT), "5"),
+                new Token(new TokenType(SEMICOLON), ";"),
                 // new Token(new TokenType(TokenLiterals.EOF), ""),
 
         };
@@ -112,7 +130,7 @@ let result = add(five, ten);
         final Lexer lexer = Lexer.New(INPUT);
 
         for (final Token test : tests) {
-            Token tok = lexer.nextToken();
+            final Token tok = lexer.nextToken();
             assertEquals(tok.getType(), test.getType());
             assertEquals(tok.getLiteral(), test.getLiteral());
         }
