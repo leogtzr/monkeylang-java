@@ -120,6 +120,8 @@ public final class Parser {
         final Identifier identifier = new Identifier();
         identifier.setToken(this.getCurToken());
         identifier.setValue(this.getCurToken().getLiteral());
+
+        stmt.setName(identifier);
         //stmt.Name = &ast.Identifier{Token: p.curToken, Value: p.curToken.Literal}
 
         if (!this.curTokenIs(new TokenType(TokenLiterals.SEMICOLON))) {
