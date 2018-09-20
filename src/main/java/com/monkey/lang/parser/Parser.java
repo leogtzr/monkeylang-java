@@ -1,9 +1,6 @@
 package com.monkey.lang.parser;
 
-import com.monkey.lang.ast.Identifier;
-import com.monkey.lang.ast.LetStatement;
-import com.monkey.lang.ast.Program;
-import com.monkey.lang.ast.Statement;
+import com.monkey.lang.ast.*;
 import com.monkey.lang.lexer.Lexer;
 import com.monkey.lang.token.Token;
 import com.monkey.lang.token.TokenLiterals;
@@ -94,9 +91,34 @@ public final class Parser {
             case TokenLiterals.RETURN:
                 return this.parseReturnStatement();
             default:
-                return null;
+                return parseExpressionStatement();
         }
     }
+
+    private ExpressionStatement parseExpressionStatement() {
+        final ExpressionStatement stmt = new ExpressionStatement();
+        stmt.setToken(this.curToken);
+        stmt.setExpression();
+
+        stmt.Expression = p.parseExpression(LOWEST)
+
+        if p.peekTokenIs(token.SEMICOLON) {
+            p.nextToken()
+        }
+
+        return stmt;
+    }
+
+    private Expression parseExpression(final int precedence) {
+        prefix := p.prefixParseFns[p.curToken.Type]
+        if prefix == nil {
+            p.noPrefixParseFnError(p.curToken.Type)
+            return nil
+        }
+        leftExp := prefix()
+        return leftExp
+    }
+
 
     private LetStatement parseLetStatement() {
         final LetStatement stmt = new LetStatement();
