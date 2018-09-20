@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import static com.monkey.lang.ast.Precedence.LOWEST;
+import static com.monkey.lang.ast.Precedence.PREFIX;
 
 public final class Parser {
 
@@ -44,11 +45,6 @@ public final class Parser {
 
         prefixFunctions.put(new TokenType(TokenLiterals.BANG), parsePrefixExpression());
         prefixFunctions.put(new TokenType(TokenLiterals.MINUS), parsePrefixExpression());
-        //p.registerPrefix(token.BANG, p.parsePrefixExpression)
-        //p.registerPrefix(token.MINUS, p.parsePrefixExpression)
-
-        //p.registerPrefix(token.IDENT, p.parseIdentifier)
-        //p.registerPrefix(token.INT, p.parseIntegerLiteral)
 
         this.setPrefixParseFns(prefixFunctions);
 
@@ -63,17 +59,18 @@ public final class Parser {
 
     }
 
-    func (p *Parser) parsePrefixExpression() ast.Expression {
-        expression := &ast.PrefixExpression{
-            Token:    p.curToken,
-                    Operator: p.curToken.Literal,
-        }
+    private PrefixParseFunction parsePrefixExpression() {
+        return () -> {
+            final PrefixExpression expression = new PrefixExpression();
+            expression.setToken(this.curToken);
+            expression.setOperator(curToken.getLiteral());
 
-        p.nextToken()
+            this.nextToken();
 
-        expression.Right = p.parseExpression(PREFIX)
+            expression.setRight(parseExpression(PREFIX));
 
-        return expression
+            return expression;
+        };
     }
 
     private PrefixParseFunction parseIdentifier() {
@@ -131,39 +128,6 @@ public final class Parser {
     public void nextToken() {
         this.curToken = this.peekToken;
         this.peekToken = this.lexer.nextToken();
-    }
-
-    public static Parser New(final Lexer lexer) {
-        final Parser parser = new Parser();
-        parser.setLexer(lexer);
-
-        /*
-            p.prefixParseFns = make(map[token.TokenType]prefixParseFn)
-            p.registerPrefix(token.IDENT, p.parseIdentifier)
-            p.registerPrefix(token.INT, p.parseIntegerLiteral)
-
-            p.registerPrefix(token.BANG, p.parsePrefixExpression)
-            p.registerPrefix(token.MINUS, p.parsePrefixExpression)
-         */
-        final Map<TokenType, PrefixParseFunction> prefixFunctions = new HashMap<>();
-        prefixFunctions.put(new TokenType(TokenLiterals.IDENT), () -> {
-            final Identifier identifier = new Identifier();
-            identifier.setToken(this.curToken);
-            return null;
-        });
-        //p.registerPrefix(token.IDENT, p.parseIdentifier)
-        //p.registerPrefix(token.INT, p.parseIntegerLiteral)
-
-        parser.setPrefixParseFns(prefixFunctions);
-
-        final Map<TokenType, InfixParseFunction> infixFunctions = new HashMap<>();
-        parser.setInfixParseFns(infixFunctions);
-
-        // Read two tokens, so curToken and peekToken are both set
-        parser.nextToken();
-        parser.nextToken();
-
-        return parser;
     }
 
     public Program parseProgram() {
@@ -236,7 +200,11 @@ public final class Parser {
 
         stmt.setName(identifier);
 
-        if (!this.curTokenIs(new TokenType(TokenLiterals.SEMICOLON))) {
+        if (!this.expectPeek(new TokenType(TokenLiterals.ASSIGN))) {
+            return null;
+        }
+
+        while (!this.curTokenIs(new TokenType(TokenLiterals.SEMICOLON))) {
             this.nextToken();
         }
 

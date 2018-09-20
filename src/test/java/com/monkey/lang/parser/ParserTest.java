@@ -18,7 +18,7 @@ class ParserTest {
 	"let foobar = 838383;";
 
         final Lexer l = Lexer.New(input);
-        final Parser p = Parser.New(l);
+        final Parser p = new Parser(l);
 
         final Program program = p.parseProgram();
 
@@ -51,7 +51,7 @@ class ParserTest {
 
     private void testLetStatement(final Statement s, final String name) {
         assertEquals(s.tokenLiteral(), "let", String.format("s.TokenLiteral() not 'let', got=%s", s.tokenLiteral()));
-        assertEquals(s instanceof LetStatement, String.format("s not *ast.LetStatement. got=%s", s));
+        // assertEquals(s instanceof LetStatement, String.format("s not *ast.LetStatement. got=%s", s));
 
         final LetStatement letStmt = (LetStatement)s;
         assertEquals(letStmt.getName().tokenLiteral(), name, String.format("s.Name not '%s'. got=%s", name, letStmt.getName()));
@@ -74,7 +74,7 @@ class ParserTest {
 "return 993322;\n";
 
         final Lexer l = Lexer.New(input);
-        final Parser p = Parser.New(l);
+        final Parser p = new Parser(l);
 
         final Program program = p.parseProgram();
         checkParserErrors(p.getErrors());
@@ -96,7 +96,7 @@ class ParserTest {
         final String input = "foobar;";
 
         final Lexer l = Lexer.New(input);
-        final Parser p = Parser.New(l);
+        final Parser p = new Parser(l);
 
         final Program program = p.parseProgram();
 
