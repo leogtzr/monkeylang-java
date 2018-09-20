@@ -1,4 +1,4 @@
-package com.monkey.lang;
+package com.monkey.lang.ast;
 
 import com.monkey.lang.ast.Expression;
 

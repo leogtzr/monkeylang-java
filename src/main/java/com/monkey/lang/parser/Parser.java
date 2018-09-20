@@ -1,5 +1,6 @@
 package com.monkey.lang.parser;
 
+import com.monkey.lang.ast.InfixParseFunction;
 import com.monkey.lang.ast.*;
 import com.monkey.lang.lexer.Lexer;
 import com.monkey.lang.token.Token;
@@ -7,8 +8,11 @@ import com.monkey.lang.token.TokenLiterals;
 import com.monkey.lang.token.TokenType;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.monkey.lang.ast.Precedence.LOWEST;
 
 public final class Parser {
 
@@ -16,6 +20,12 @@ public final class Parser {
     private Token curToken;
     private Token peekToken;
     private List<String> errors;
+
+    private Map<TokenType, PrefixParseFunction> prefixParseFns = null;
+    private Map<TokenType, InfixParseFunction> infixParseFns = null;
+
+    //prefixParseFns map[token.TokenType]prefixParseFn
+    //infixParseFns  map[token.TokenType]infixParseFn
 
     public Parser() {
         this.errors = new ArrayList<>();
@@ -62,6 +72,28 @@ public final class Parser {
         final Parser parser = new Parser();
         parser.setLexer(lexer);
 
+        /*
+            p.prefixParseFns = make(map[token.TokenType]prefixParseFn)
+            p.registerPrefix(token.IDENT, p.parseIdentifier)
+            p.registerPrefix(token.INT, p.parseIntegerLiteral)
+
+            p.registerPrefix(token.BANG, p.parsePrefixExpression)
+            p.registerPrefix(token.MINUS, p.parsePrefixExpression)
+         */
+        final Map<TokenType, PrefixParseFunction> prefixFunctions = new HashMap<>();
+        prefixFunctions.put(new TokenType(TokenLiterals.IDENT), () -> {
+            final Identifier identifier = new Identifier();
+            identifier.setToken(this.curToken);
+            return null;
+        });
+        //p.registerPrefix(token.IDENT, p.parseIdentifier)
+        //p.registerPrefix(token.INT, p.parseIntegerLiteral)
+
+        parser.setPrefixParseFns(prefixFunctions);
+
+        final Map<TokenType, InfixParseFunction> infixFunctions = new HashMap<>();
+        parser.setInfixParseFns(infixFunctions);
+
         // Read two tokens, so curToken and peekToken are both set
         parser.nextToken();
         parser.nextToken();
@@ -98,25 +130,30 @@ public final class Parser {
     private ExpressionStatement parseExpressionStatement() {
         final ExpressionStatement stmt = new ExpressionStatement();
         stmt.setToken(this.curToken);
-        stmt.setExpression();
 
-        stmt.Expression = p.parseExpression(LOWEST)
+        final Expression expression = parseExpression(LOWEST);
+        stmt.setExpression(expression);
 
-        if p.peekTokenIs(token.SEMICOLON) {
-            p.nextToken()
+        if (this.peekTokenIs(new TokenType(TokenLiterals.SEMICOLON))) {
+            this.nextToken();
         }
 
         return stmt;
     }
 
     private Expression parseExpression(final int precedence) {
-        prefix := p.prefixParseFns[p.curToken.Type]
-        if prefix == nil {
-            p.noPrefixParseFnError(p.curToken.Type)
-            return nil
+        final PrefixParseFunction prefix = this.prefixParseFns.get(this.curToken.getType());
+        if (prefix == null) {
+            this.noPrefixParseFnError(this.curToken.getType());
+            return null;
         }
-        leftExp := prefix()
-        return leftExp
+        final Expression leftExp = prefix.function();
+        return leftExp;
+    }
+
+    private void noPrefixParseFnError(final TokenType tokenType) {
+        final String msg = String.format("no prefix parse function for %s found", tokenType);
+        this.errors.add(msg);
     }
 
 
@@ -179,4 +216,19 @@ public final class Parser {
         return this.getPeekToken().getType().equals(t);
     }
 
+    public Map<TokenType, PrefixParseFunction> getPrefixParseFns() {
+        return prefixParseFns;
+    }
+
+    public Map<TokenType, InfixParseFunction> getInfixParseFns() {
+        return infixParseFns;
+    }
+
+    public void setPrefixParseFns(final Map<TokenType, PrefixParseFunction> prefixParseFns) {
+        this.prefixParseFns = prefixParseFns;
+    }
+
+    public void setInfixParseFns(final Map<TokenType, InfixParseFunction> infixParseFns) {
+        this.infixParseFns = infixParseFns;
+    }
 }
