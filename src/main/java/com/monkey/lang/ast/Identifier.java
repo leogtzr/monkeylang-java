@@ -9,6 +9,13 @@ public final class Identifier extends Expression implements Node {
     private Token token;
     private String value;
 
+    public Identifier() {}
+
+    public Identifier(final Token token, final String value) {
+        this.token = token;
+        this.value = value;
+    }
+
     public Token getToken() {
         return token;
     }

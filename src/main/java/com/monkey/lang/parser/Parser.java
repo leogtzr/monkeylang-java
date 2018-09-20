@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import static com.monkey.lang.ast.Precedence.LOWEST;
 
@@ -24,11 +25,75 @@ public final class Parser {
     private Map<TokenType, PrefixParseFunction> prefixParseFns = null;
     private Map<TokenType, InfixParseFunction> infixParseFns = null;
 
-    //prefixParseFns map[token.TokenType]prefixParseFn
-    //infixParseFns  map[token.TokenType]infixParseFn
-
-    public Parser() {
+    public Parser(final Lexer lexer) {
         this.errors = new ArrayList<>();
+        // final Parser parser = new Parser();
+        this.lexer = lexer;
+
+        /*
+            p.prefixParseFns = make(map[token.TokenType]prefixParseFn)
+            p.registerPrefix(token.IDENT, p.parseIdentifier)
+            p.registerPrefix(token.INT, p.parseIntegerLiteral)
+
+            p.registerPrefix(token.BANG, p.parsePrefixExpression)
+            p.registerPrefix(token.MINUS, p.parsePrefixExpression)
+         */
+        final Map<TokenType, PrefixParseFunction> prefixFunctions = new HashMap<>();
+        prefixFunctions.put(new TokenType(TokenLiterals.IDENT), parseIdentifier());
+        prefixFunctions.put(new TokenType(TokenLiterals.INT), parseIntegerLiteral());
+
+        prefixFunctions.put(new TokenType(TokenLiterals.BANG), parsePrefixExpression());
+        prefixFunctions.put(new TokenType(TokenLiterals.MINUS), parsePrefixExpression());
+        //p.registerPrefix(token.BANG, p.parsePrefixExpression)
+        //p.registerPrefix(token.MINUS, p.parsePrefixExpression)
+
+        //p.registerPrefix(token.IDENT, p.parseIdentifier)
+        //p.registerPrefix(token.INT, p.parseIntegerLiteral)
+
+        this.setPrefixParseFns(prefixFunctions);
+
+        final Map<TokenType, InfixParseFunction> infixFunctions = new HashMap<>();
+        this.setInfixParseFns(infixFunctions);
+
+        // Read two tokens, so curToken and peekToken are both set
+        this.nextToken();
+        this.nextToken();
+
+        // return parser;
+
+    }
+
+    func (p *Parser) parsePrefixExpression() ast.Expression {
+        expression := &ast.PrefixExpression{
+            Token:    p.curToken,
+                    Operator: p.curToken.Literal,
+        }
+
+        p.nextToken()
+
+        expression.Right = p.parseExpression(PREFIX)
+
+        return expression
+    }
+
+    private PrefixParseFunction parseIdentifier() {
+        return () -> new Identifier(this.curToken, this.curToken.getLiteral());
+    }
+
+    private PrefixParseFunction parseIntegerLiteral() {
+        return () -> {
+            final IntegerLiteral lit = new IntegerLiteral();
+            lit.setToken(this.curToken);
+            try {
+                final int value = Integer.parseInt(this.curToken.getLiteral());
+                lit.setValue(value);
+            } catch (final NumberFormatException ex) {
+                final String msg = String.format("could not parse %s as Integer", this.curToken.getLiteral());
+                this.errors.add(msg);
+                return null;
+            }
+            return lit;
+        };
     }
 
     public Lexer getLexer() {
