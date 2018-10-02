@@ -10,9 +10,11 @@ public final class Lexer {
     private int position;
     private int readPosition;
     private char ch;
+    private int lineNumber;
 
     public static Lexer New(final String input) {
         final Lexer lexer = new Lexer();
+        lexer.lineNumber = 1;
         lexer.setInput(input);
         lexer.readChar();
         return lexer;
@@ -201,8 +203,22 @@ public final class Lexer {
     }
 
     private void skipWithespace() {
-        while (this.ch == ' ' || this.ch == '\t' || this.ch == '\r' || this.ch == '\n') {
-            this.readChar();
+
+        whitespaces:
+        for (;;) {
+            switch (this.ch) {
+                case ' ':
+                case '\t':
+                    this.readChar();
+                    break;
+                case '\n':
+                case '\r':
+                    this.readChar();
+                    this.lineNumber++;
+                    break;
+                default:
+                    break whitespaces;
+            }
         }
     }
 
@@ -234,4 +250,7 @@ public final class Lexer {
         return new Token(tokenType, ch + "");
     }
 
+    public int currentLineNumber() {
+        return this.lineNumber;
+    }
 }

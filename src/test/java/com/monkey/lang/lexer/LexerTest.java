@@ -11,15 +11,6 @@ public class LexerTest {
 
     @Test
     void nextToken() {
-        //final String INPUT = "=+(){},;";
-//        final String INPUT = "let five = 5;" +
-//                "let ten = 10;" +
-//                "\n" +
-//                "let add = fn(x, y) {\n" +
-//                "  x + y;\n" +
-//                "};\n" +
-//
-//                "let result = add(five, ten);";
 
         final String INPUT = "let five = 5;\n" +
                 "let ten = 10;\n" +
@@ -167,21 +158,6 @@ public class LexerTest {
 
         };
 
-        /*
-        input := `let five = 5;
-let ten = 10;
-
-let add = fn(x, y) {
-
-  x + y;
-};
-
-let result = add(five, ten);
-!-/*5;
-5 < 10 > 5;
-`
-         */
-
         final Lexer lexer = Lexer.New(INPUT);
 
         for (final Token test : tests) {
@@ -191,4 +167,42 @@ let result = add(five, ten);
         }
 
     }
+
+    @Test
+    void testLineNumbers() {
+        final String INPUT = "\n" +
+                "\t\tlet five = 5;\n" +
+                "\t\n" +
+                "\t\n" +
+                "\t\tlet ten = 10;\n" +
+                "\t\n" +
+                "\t\n";
+
+        final Token[] tests = {
+                new Token(new TokenType(LET), "let"),
+                new Token(new TokenType(IDENT), "five"),
+                new Token(new TokenType(ASSIGN), "="),
+                new Token(new TokenType(INT), "5"),
+                new Token(new TokenType(SEMICOLON), ";"),
+                new Token(new TokenType(LET), "let"),
+                new Token(new TokenType(IDENT), "ten"),
+                new Token(new TokenType(ASSIGN), "="),
+                new Token(new TokenType(INT), "10"),
+                new Token(new TokenType(SEMICOLON), ";"),
+
+        };
+
+        final Lexer lexer = Lexer.New(INPUT);
+
+        for (final Token test : tests) {
+            final Token tok = lexer.nextToken();
+            assertEquals(tok.getType(), test.getType());
+            assertEquals(tok.getLiteral(), test.getLiteral());
+        }
+
+        final int inputLineNumberCount = INPUT.split("\n").length;
+        assertEquals(inputLineNumberCount, lexer.currentLineNumber());
+
+    }
+
 }
