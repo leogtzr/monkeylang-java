@@ -22,14 +22,14 @@ class ParserTest {
 
         final Program program = p.parseProgram();
 
-        // checkParserError(t, p)
-        if (p.getErrors().size() > 0) {
-            System.err.printf("parser has %d errors\n", p.getErrors().size());
-            for (final String msg : p.getErrors()) {
-                System.err.printf("parser error: %s", msg);
-            }
-            fail(String.format("parser has %d errors", p.getErrors().size()));
-        }
+        checkParserErrors(p.getErrors());
+//        if (p.getErrors().size() > 0) {
+//            System.err.printf("parser has %d errors\n", p.getErrors().size());
+//            for (final String msg : p.getErrors()) {
+//                System.err.printf("parser error: %s", msg);
+//            }
+//            fail(String.format("parser has %d errors", p.getErrors().size()));
+//        }
 
         if (program == null) {
             fail("parseProgram() returned null");

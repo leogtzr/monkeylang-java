@@ -249,19 +249,11 @@ public final class Parser {
         return this.getPeekToken().getType().equals(t);
     }
 
-    public Map<TokenType, PrefixParseFunction> getPrefixParseFns() {
-        return prefixParseFns;
-    }
-
-    public Map<TokenType, InfixParseFunction> getInfixParseFns() {
-        return infixParseFns;
-    }
-
-    public void setPrefixParseFns(final Map<TokenType, PrefixParseFunction> prefixParseFns) {
+    private void setPrefixParseFns(final Map<TokenType, PrefixParseFunction> prefixParseFns) {
         this.prefixParseFns = prefixParseFns;
     }
 
-    public void setInfixParseFns(final Map<TokenType, InfixParseFunction> infixParseFns) {
+    private void setInfixParseFns(final Map<TokenType, InfixParseFunction> infixParseFns) {
         this.infixParseFns = infixParseFns;
     }
 }

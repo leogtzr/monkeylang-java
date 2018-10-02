@@ -26,6 +26,11 @@ public final class Token {
         put("if", IF);
         put("else", ELSE);
         put("return", RETURN);
+        put("word", WORD);
+        put("ref", REF);
+        put("cpt", CPT);
+        put("tr", TR);
+        put("me", ME);
     }};
 
     public static TokenType lookupIdentifier(final String literal) {

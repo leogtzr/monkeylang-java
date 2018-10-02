@@ -4,25 +4,7 @@ import com.monkey.lang.token.Token;
 import com.monkey.lang.token.TokenType;
 import org.junit.jupiter.api.Test;
 
-import static com.monkey.lang.token.TokenLiterals.LET;
-import static com.monkey.lang.token.TokenLiterals.IDENT;
-import static com.monkey.lang.token.TokenLiterals.ASSIGN;
-import static com.monkey.lang.token.TokenLiterals.INT;
-import static com.monkey.lang.token.TokenLiterals.SEMICOLON;
-import static com.monkey.lang.token.TokenLiterals.FUNCTION;
-import static com.monkey.lang.token.TokenLiterals.LPAREN;
-import static com.monkey.lang.token.TokenLiterals.COMMA;
-import static com.monkey.lang.token.TokenLiterals.RPAREN;
-import static com.monkey.lang.token.TokenLiterals.LBRACE;
-import static com.monkey.lang.token.TokenLiterals.PLUS;
-import static com.monkey.lang.token.TokenLiterals.RBRACE;
-import static com.monkey.lang.token.TokenLiterals.BANG;
-import static com.monkey.lang.token.TokenLiterals.MINUS;
-import static com.monkey.lang.token.TokenLiterals.SLASH;
-import static com.monkey.lang.token.TokenLiterals.ASTERISK;
-import static com.monkey.lang.token.TokenLiterals.LT;
-import static com.monkey.lang.token.TokenLiterals.GT;
-
+import static com.monkey.lang.token.TokenLiterals.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LexerTest {
@@ -52,8 +34,20 @@ public class LexerTest {
                 "if (5 < 10) {\n" +
                 "    return true;\n" +
                 "} else {" +
-                "return false;" +
-                "}";
+                    "return false;" +
+                "}" +
+
+                "10 == 10;\n" +
+                "10 != 9;\n" +
+                "\"foobar\"\n" +
+                "\"foo bar\"\n" +
+                "[1, 2];\n" +
+                "{\"foo\": \"bar\"}\n" +
+                "me;\n" +
+                "tr;\n" +
+                "word;\n" +
+                "cpt;\n" +
+                "ref;";
 
         final Token[] tests = {
                 new Token(new TokenType(LET), "let"),
@@ -108,7 +102,68 @@ public class LexerTest {
                 new Token(new TokenType(GT), ">"),
                 new Token(new TokenType(INT), "5"),
                 new Token(new TokenType(SEMICOLON), ";"),
-                // new Token(new TokenType(TokenLiterals.EOF), ""),
+
+                new Token(new TokenType(IF), "if"),
+                new Token(new TokenType(LPAREN), "("),
+                new Token(new TokenType(INT), "5"),
+                new Token(new TokenType(LT), "<"),
+                new Token(new TokenType(INT), "10"),
+                new Token(new TokenType(RPAREN), ")"),
+                new Token(new TokenType(LBRACE), "{"),
+                new Token(new TokenType(RETURN), "return"),
+                new Token(new TokenType(TRUE), "true"),
+                new Token(new TokenType(SEMICOLON), ";"),
+                new Token(new TokenType(RBRACE), "}"),
+                new Token(new TokenType(ELSE), "else"),
+                new Token(new TokenType(LBRACE), "{"),
+                new Token(new TokenType(RETURN), "return"),
+                new Token(new TokenType(FALSE), "false"),
+                new Token(new TokenType(SEMICOLON), ";"),
+                new Token(new TokenType(RBRACE), "}"),
+
+
+                new Token(new TokenType(INT), "10"),
+                new Token(new TokenType(EQ), "=="),
+                new Token(new TokenType(INT), "10"),
+                new Token(new TokenType(SEMICOLON), ";"),
+
+                new Token(new TokenType(INT), "10"),
+                new Token(new TokenType(NOT_EQ), "!="),
+                new Token(new TokenType(INT), "9"),
+                new Token(new TokenType(SEMICOLON), ";"),
+
+                new Token(new TokenType(STRING), "foobar"),
+                new Token(new TokenType(STRING), "foo bar"),
+                new Token(new TokenType(LBRACKET), "["),
+
+                new Token(new TokenType(INT), "1"),
+                new Token(new TokenType(COMMA), ","),
+                new Token(new TokenType(INT), "2"),
+                new Token(new TokenType(RBRACKET), "]"),
+                new Token(new TokenType(SEMICOLON), ";"),
+
+                new Token(new TokenType(LBRACE), "{"),
+                new Token(new TokenType(STRING), "foo"),
+                new Token(new TokenType(COLON), ":"),
+                new Token(new TokenType(STRING), "bar"),
+                new Token(new TokenType(RBRACE), "}"),
+
+                new Token(new TokenType(ME), "me"),
+                new Token(new TokenType(SEMICOLON), ";"),
+
+                new Token(new TokenType(TR), "tr"),
+                new Token(new TokenType(SEMICOLON), ";"),
+
+                new Token(new TokenType(WORD), "word"),
+                new Token(new TokenType(SEMICOLON), ";"),
+
+                new Token(new TokenType(CPT), "cpt"),
+                new Token(new TokenType(SEMICOLON), ";"),
+
+                new Token(new TokenType(REF), "ref"),
+                new Token(new TokenType(SEMICOLON), ";"),
+
+                new Token(new TokenType(EOF), ""),
 
         };
 

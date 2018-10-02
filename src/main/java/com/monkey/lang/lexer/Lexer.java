@@ -42,14 +42,6 @@ public final class Lexer {
         this.readPosition = readPosition;
     }
 
-    public char getCh() {
-        return ch;
-    }
-
-    public void setCh(final char ch) {
-        this.ch = ch;
-    }
-
     @Override
     public String toString() {
         return "Lexer{" +
@@ -80,7 +72,7 @@ public final class Lexer {
                 if (this.peekChar() == '=') {
                     final char ch = this.ch;
                     this.readChar();
-                    tok = new Token(new TokenType(TokenLiterals.ASSIGN), (ch + this.ch) + "");
+                    tok = new Token(new TokenType(TokenLiterals.EQ), String.valueOf(ch) + String.valueOf(this.ch));
                 } else {
                     tok = newToken(new TokenType(TokenLiterals.ASSIGN), this.ch);
                 }
@@ -114,7 +106,7 @@ public final class Lexer {
                 if (this.peekChar() == '=') {
                     final char ch = this.ch;
                     this.readChar();
-                    tok = new Token(new TokenType(TokenLiterals.NOT_EQ), (ch + this.ch) + "");
+                    tok = new Token(new TokenType(TokenLiterals.NOT_EQ), String.valueOf(ch) + String.valueOf(this.ch));
                 } else {
                     tok = newToken(new TokenType(TokenLiterals.BANG), this.ch);
                 }
@@ -144,10 +136,29 @@ public final class Lexer {
                 tok = newToken(new TokenType(TokenLiterals.RBRACE), this.ch);
                 break;
 
+            case '"':
+                tok = new Token();
+                tok.setType(new TokenType(TokenLiterals.STRING));
+                tok.setLiteral(this.readString());
+                break;
+
+            case '[':
+                tok = newToken(new TokenType(TokenLiterals.LBRACKET), this.ch);
+                break;
+
+            case ':':
+                tok = newToken(new TokenType(TokenLiterals.COLON), this.ch);
+                break;
+
+            case ']':
+                tok = newToken(new TokenType(TokenLiterals.RBRACKET), this.ch);
+                break;
+
             case 0:
                 tok = newToken(new TokenType(TokenLiterals.EOF), (char)0);
                 tok.setLiteral("");
                 break;
+
             default:
                 if (isLetter(this.ch)) {
                     tok = new Token();
@@ -167,6 +178,18 @@ public final class Lexer {
 
         this.readChar();
         return tok;
+    }
+
+    private String readString() {
+        final int pos = this.position + 1;
+
+        for (;;) {
+            this.readChar();
+            if (this.ch == '"') {
+                break;
+            }
+        }
+        return this.input.substring(pos, this.position);
     }
 
     private static boolean isLetter(final char ch) {

@@ -2,6 +2,9 @@ package com.monkey.lang.token;
 
 public class TokenLiterals {
 
+    public static final String LBRACKET = "[";
+    public static final String RBRACKET = "[";
+
     private TokenLiterals() {}
 
     public static final String ILLEGAL = "ILLEGAL";
@@ -18,6 +21,7 @@ public class TokenLiterals {
     // Delimiters
     public static final String COMMA     = ",";
     public static final String SEMICOLON = ";";
+    public static final String COLON = ":";
 
     public static final String LPAREN = "(";
     public static final String RPAREN = ")";
@@ -33,6 +37,12 @@ public class TokenLiterals {
     public static final String ELSE = "ELSE";
     public static final String RETURN = "RETURN";
 
+    public static final String WORD = "WORD";
+    public static final String REF = "REF";
+    public static final String CPT = "CPT";
+    public static final String TR = "TR";
+    public static final String ME = "ME";
+
     // Operators
     public static final String MINUS = "-";
     public static final String BANG = "!";
@@ -43,4 +53,6 @@ public class TokenLiterals {
 
     public static final String EQ = "==";
     public static final String NOT_EQ = "!=";
+
+    public static final String STRING = "STRING";
 }
