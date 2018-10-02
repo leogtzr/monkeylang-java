@@ -76,6 +76,43 @@ class ParserTest {
 
     }
 
+    @Test
+    void testLiteralBooleanExpressions() {
+        class testParams {
+            public String input;
+            public boolean expectedValue;
+            public testParams(String input, boolean expectedValue) {
+                this.input = input;
+                this.expectedValue = expectedValue;
+            }
+        }
+
+        final testParams []testParams = {
+                new testParams("let foobar = true;", true),
+                new testParams("let foobar = false;", false)
+
+        };
+
+        for (final testParams tt : testParams) {
+
+            final Lexer l = Lexer.New(tt.input);
+            final Parser p = new Parser(l);
+
+            final Program program = p.parseProgram();
+
+            checkParserErrors(p.getErrors());
+
+            if (program == null) {
+                fail("parseProgram() returned null");
+            }
+
+            System.out.println(program.getStatements());
+
+            final Statement stmt = program.getStatements().get(0);
+            checkBooleanLiteralExpression(((LetStatement)stmt).getValue(), tt.expectedValue);
+        }
+    }
+
     private void checkIntegerLiteral(final Expression literal, final int value) {
 
         final IntegerLiteral integerLiteral = (IntegerLiteral)literal;
