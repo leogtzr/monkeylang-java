@@ -202,7 +202,6 @@ public class LexerTest {
 
         final int inputLineNumberCount = INPUT.split("\n").length;
         assertEquals(inputLineNumberCount, lexer.currentLineNumber());
-
     }
 
 }
