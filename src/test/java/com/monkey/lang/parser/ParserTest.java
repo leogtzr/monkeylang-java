@@ -42,6 +42,48 @@ class ParserTest {
 
     }
 
+    @Test
+    void testLiteralExpressions() {
+        class testParams {
+            public String input;
+            public int expectedValue;
+            public testParams(String input, int expectedValue) {
+                this.input = input;
+                this.expectedValue = expectedValue;
+            }
+        }
+
+        final testParams []testParams = {new testParams("let x = 5;", 5)};
+
+        for (final testParams tt : testParams) {
+
+            final Lexer l = Lexer.New(tt.input);
+            final Parser p = new Parser(l);
+
+            final Program program = p.parseProgram();
+
+            checkParserErrors(p.getErrors());
+
+            if (program == null) {
+                fail("parseProgram() returned null");
+            }
+
+            System.out.println(program.getStatements());
+
+            final Statement stmt = program.getStatements().get(0);
+            checkIntegerLiteral(((LetStatement)stmt).getValue(), tt.expectedValue);
+        }
+
+    }
+
+    private void checkIntegerLiteral(final Expression literal, final int value) {
+
+        final IntegerLiteral integerLiteral = (IntegerLiteral)literal;
+        assertEquals(integerLiteral.getValue(), value, String.format("integerLiteral.Value not %d. got=%d", value, integerLiteral.getValue()));
+        assertEquals(integerLiteral.getToken().getLiteral(), String.format("%d", value),
+                String.format("integerLiteral.TokenLiteral not %d. got=%s", value, integerLiteral.getToken().getLiteral()));
+    }
+
     private void testLetStatement(final Statement s, final String name) {
         assertEquals(s.tokenLiteral(), "let", String.format("s.TokenLiteral() not 'let', got=%s", s.tokenLiteral()));
         // assertEquals(s instanceof LetStatement, String.format("s not *ast.LetStatement. got=%s", s));

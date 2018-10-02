@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 import static com.monkey.lang.ast.Precedence.LOWEST;
 import static com.monkey.lang.ast.Precedence.PREFIX;
@@ -204,7 +203,11 @@ public final class Parser {
             return null;
         }
 
-        while (!this.curTokenIs(new TokenType(TokenLiterals.SEMICOLON))) {
+        this.nextToken();
+
+        stmt.setValue(this.parseExpression(LOWEST));
+
+        if (this.peekTokenIs(new TokenType(TokenLiterals.SEMICOLON))) {
             this.nextToken();
         }
 
