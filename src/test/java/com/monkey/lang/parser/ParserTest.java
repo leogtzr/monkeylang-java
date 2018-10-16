@@ -113,6 +113,11 @@ class ParserTest {
         }
     }
 
+    private void checkBooleanLiteralExpression(final Expression exp, final boolean value) {
+        final Bool bo = (Bool)exp;
+        assertTrue(bo.getValue() == value, String.format("Bool.Value not %b, got: %b", bo.getValue(), value));
+    }
+
     private void checkIntegerLiteral(final Expression literal, final int value) {
 
         final IntegerLiteral integerLiteral = (IntegerLiteral)literal;
