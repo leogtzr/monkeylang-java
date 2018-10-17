@@ -224,8 +224,15 @@ public final class Lexer {
 
     private String readIdentifier() {
         final int position = this.position;
-        while (isLetter(this.ch)) {
+//        while (isLetter(this.ch)) {
+//            this.readChar();
+//        }
+
+        if (isLetter(this.ch) && !isDigit(this.ch)) {
             this.readChar();
+            while (isLetter(this.ch) || isDigit(this.ch)) {
+                this.readChar();
+            }
         }
         return this.input.substring(position, this.position);
     }

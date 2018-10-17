@@ -45,6 +45,9 @@ public final class Parser {
         prefixFunctions.put(new TokenType(TokenLiterals.BANG), parsePrefixExpression());
         prefixFunctions.put(new TokenType(TokenLiterals.MINUS), parsePrefixExpression());
 
+        prefixFunctions.put(new TokenType(TokenLiterals.TRUE), this.parseBoolean());
+        prefixFunctions.put(new TokenType(TokenLiterals.FALSE), this.parseBoolean());
+
         this.setPrefixParseFns(prefixFunctions);
 
         final Map<TokenType, InfixParseFunction> infixFunctions = new HashMap<>();
@@ -53,8 +56,6 @@ public final class Parser {
         // Read two tokens, so curToken and peekToken are both set
         this.nextToken();
         this.nextToken();
-
-        // return parser;
 
     }
 
@@ -74,6 +75,10 @@ public final class Parser {
 
     private PrefixParseFunction parseIdentifier() {
         return () -> new Identifier(this.curToken, this.curToken.getLiteral());
+    }
+
+    private PrefixParseFunction parseBoolean() {
+        return () -> new Bool(this.curToken, this.curTokenIs(new TokenType(TokenLiterals.TRUE)));
     }
 
     private PrefixParseFunction parseIntegerLiteral() {

@@ -36,9 +36,8 @@ public final class Token {
     public static TokenType lookupIdentifier(final String literal) {
         if (keywords.containsKey(literal)) {
             return new TokenType(keywords.get(literal));
-        } else {
-            return new TokenType(IDENT);
         }
+        return new TokenType(IDENT);
     }
 
     public TokenType getType() {

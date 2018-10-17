@@ -10,6 +10,26 @@ import static org.junit.jupiter.api.Assertions.*;
 public class LexerTest {
 
     @Test
+    void nextTokenWithIdentifier() {
+        final String INPUT = "let x123 = 5;";
+        final Token[] tests = {
+                new Token(new TokenType(LET), "let"),
+                new Token(new TokenType(IDENT), "x123"),
+                new Token(new TokenType(ASSIGN), "="),
+                new Token(new TokenType(INT), "5"),
+                new Token(new TokenType(SEMICOLON), ";"),
+        };
+
+        final Lexer lexer = Lexer.New(INPUT);
+
+        for (final Token test : tests) {
+            final Token tok = lexer.nextToken();
+            assertEquals(tok.getType(), test.getType());
+            assertEquals(tok.getLiteral(), test.getLiteral());
+        }
+    }
+
+    @Test
     void nextToken() {
 
         final String INPUT = "let five = 5;\n" +

@@ -15,7 +15,7 @@ class ParserTest {
         final String input = "" +
 	"let x = 5;\n" +
 	"let y = 10;\n" +
-	"let foobar = 838383;";
+	"let foobar = 838383;\n";
 
         final Lexer l = Lexer.New(input);
         final Parser p = new Parser(l);
@@ -38,6 +38,44 @@ class ParserTest {
         for (int i = 0; i < tests.length; i++) {
             final Statement stmt = program.getStatements().get(i);
             testLetStatement(stmt, tests[i]);
+        }
+
+    }
+
+    @Test
+    void testLetStatements2() {
+        class testParams {
+            public String input;
+            public String expectedIdentifier;
+            public Object expectedValue;
+            public testParams(String input, String expectedIdentifier, Object expectedValue) {
+                this.input = input;
+                this.expectedValue = expectedValue;
+                this.expectedIdentifier = expectedIdentifier;
+            }
+        }
+
+        final testParams []testParams = {
+                new testParams("let x = 5;", "x", 5),
+                new testParams("let y = true;", "y", true),
+                new testParams("let z123 = true;", "z123", true),
+                new testParams("let foobar = y", "foobar", "y")
+        };
+
+        for (final testParams tt : testParams) {
+            final Lexer l = Lexer.New(tt.input);
+            final Parser p = new Parser(l);
+
+            final Program program = p.parseProgram();
+
+            checkParserErrors(p.getErrors());
+
+            if (program == null) {
+                fail("parseProgram() returned null");
+            }
+
+            final Statement stmt = program.getStatements().get(0);
+            testLetStatement(stmt, tt.expectedIdentifier);
         }
 
     }
